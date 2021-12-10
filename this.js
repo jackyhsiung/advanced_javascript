@@ -1,26 +1,26 @@
 // this 
 // 1. gives methods access to their objects (who invokes the function)
 const obj = {
-	name: 'Jojo',
-	speak: function () {
-		return 'I am ' + this.name
-	}
+  name: 'Jojo',
+  speak: function () {
+    return 'I am ' + this.name
+  }
 }
 
 obj.speak()
 
 // 2. reuse same code for multiple objects
 function speak() {
-	return this.name
+  return this.name
 }
 const name = 'Allen'
 const obj1 = {
-	name: 'Bob',
-	speak: speak
+  name: 'Bob',
+  speak: speak
 }
 const obj2 = {
-	name: 'Chris',
-	speak: speak
+  name: 'Chris',
+  speak: speak
 }
 
 console.log(speak())
@@ -66,14 +66,14 @@ const obj = {
 
 // call, apply, bind
 const wizard = {
-	health: 30,
-	heal() {
-		this.health = 100
-	}
+  health: 30,
+  heal() {
+    this.health = 100
+  }
 }
 
 const warrior = {
-	health: 50,
+  health: 50,
 }
 
 wizard.heal()

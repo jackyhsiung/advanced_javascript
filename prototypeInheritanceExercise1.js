@@ -29,3 +29,18 @@ Array.prototype.myReduce = function(callbackFn, initialValue) {
 
 const newValue = [1, [2]].myReduce((acc, val) => acc.concat(val), [])
 console.log(newValue)
+
+// filter
+
+Array.prototype.myFilter = function(callbackFn) {
+  let res = []
+  for (let i=0; i<this.length; i++) {
+    if (callbackFn(this[i])) {
+      res.push(this[i])
+    }
+  }
+  return res
+}
+
+console.log(arr.filter(item => item >= 2))
+console.log(arr.myFilter(item => item >= 2))

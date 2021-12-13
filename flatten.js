@@ -37,3 +37,35 @@ function flatWithReduce(arr, depth) {
 }
 
 console.log(flatWithReduce(arr, 1))
+
+
+const obj = {
+  a: 1,
+  b: {
+    c: 2,
+    d: {
+      e: 3
+    }
+  },
+  f: [1, 2, 3],
+  g: false,
+}
+
+function flattenObj(obj) {
+  let res = {}
+  for (let key in obj) {
+    if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+      subFlattenedObj = flattenObj(obj[key])
+      for (let subKey in subFlattenedObj) {
+        const newKey = key + '_' + subKey
+        res[newKey] = subFlattenedObj[subKey]
+      }
+    } else {
+      res[key] = obj[key]
+    }
+  }
+
+  return res
+}
+
+console.log(flattenObj(obj))

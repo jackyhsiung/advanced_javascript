@@ -55,7 +55,7 @@ function flattenObj(obj) {
   let res = {}
   for (let key in obj) {
     if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
-      subFlattenedObj = flattenObj(obj[key])
+      const subFlattenedObj = flattenObj(obj[key])
       for (let subKey in subFlattenedObj) {
         const newKey = key + '_' + subKey
         res[newKey] = subFlattenedObj[subKey]

@@ -1,56 +1,39 @@
-class Promise {
-  constructor(handler) {
-    this.status = "pending";
-    this.onFulfilledCallbacks = [];
-    this.onRejectedCallbacks = [];
-
-    const resolve = value => {
-      if (this.status === "pending") {
-        this.status = "fulfilled";
-        this.value = value;
-        this.onFulfilledCallbacks.forEach(fn => fn(value));
-      }
-    };
-
-    const reject = value => {
-      if (this.status === "pending") {
-        this.status = "rejected";
-        this.value = value;
-        this.onRejectedCallbacks.forEach(fn => fn(value));
-      }
-    };
-
-    try {
-        handler(resolve, reject);
-    } catch (err) {
-        reject(err);
-    }
+const promise = new Promise((resolve, reject) => {
+  console.log('Called')
+  const value = 1;
+  const done = true;
+  if (done) {
+    resolve(value)
+  } else {
+    reject('Something wrong')
   }
+})
 
-  then(onFulfilled, onRejected) {
-    if (this.status === "pending") {
-      this.onFulfilledCallbacks.push(onFulfilled);
-      this.onRejectedCallbacks.push(onRejected);
-    }
+// promise.then((value) => console.log(value))
 
-    if (this.status === "fulfilled") {
-      onFulfilled(this.value);
-    }
+// async function asyncCall () {
+//   const result = await promise
+//   console.log(result)
+//   return 1
+// }
 
-    if (this.status === "rejected") {
-      onRejected(this.value);
-    }
-  }
+// console.log(asyncCall())
+
+function apiCall() {
+  return new Promise((resolve, reject) => {
+    const value = 'secret message'
+    setTimeout(() => {
+      resolve(value)
+    }, 1000)
+  })
 }
 
-// testing code
-const p3 = new Promise((resolve, reject) => {
-  setTimeout(() => resolve('resolved!'), 1000);
-});
-p3.then((res) => {
-  console.log(res);
-}, (err) => {
-  console.log(err);
-});
+async function getMessage() {
+  const message = await apiCall();
+  console.log(message)
+}
 
-// ' resolved!'
+(function init() {
+  getMessage()
+  console.log('other things')
+})()
